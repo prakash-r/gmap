@@ -1,42 +1,41 @@
 (function($) {
 	function GMap($targetEle){
-    	 this.marker;
-    	 var $target = $targetEle;
-    	 this.getMarker = function(){
-    		 return marker;
-    	 }
-    	 this.getTarget = function(){
-    		 return $target;
-    	 }
-    	 var fieldVal = "";
-    	 $($target).closest('.form-field').find('.compositeWrapper > span').each(function(){
-    		 var val = $(this).find(':input').val();
-    	 });
+		this.marker;
+		var $target = $targetEle;
+		this.getMarker = function(){
+			return marker;
+		}
+		this.getTarget = function(){
+			return $target;
+		}
+    	 	var fieldVal = "";
+    	 	$($target).closest('.form-field').find('.compositeWrapper > span').each(function(){
+			var val = $(this).find(':input').val();
+    	 	});
     	
-    	 this.open();
-     }
+    	 	this.open();
+     	}
+     	
 	GMap.prototype.open = function(){
-    	 var geocoder, geolocation;
-         var map;
-         var infowindow = new google.maps.InfoWindow({size: new google.maps.Size(150,50)});
-         var self = this;
-         geocoder = new google.maps.Geocoder();
-         var latlng = new google.maps.LatLng(-34.397, 150.644);
-         var mapOptions = {
-           zoom: 8,
-           center: latlng,
-           mapTypeId: google.maps.MapTypeId.ROADMAP
-         }
+		var geocoder, geolocation, map;
+         	var infowindow = new google.maps.InfoWindow({size: new google.maps.Size(150,50)});
+         	var self = this;
+         	geocoder = new google.maps.Geocoder();
+         	var latlng = new google.maps.LatLng(-34.397, 150.644);
+         	var mapOptions = {
+			zoom: 8,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		}
          
-         
-         $('#map_canvas').zcmodal({
-        	 title : 'Pick your address',
-        	width : 700,
-        	closeOnAnyClick : false,
+	$('#map_canvas').zcmodal({
+		title : 'Pick your address',
+		width : 700,
+		closeOnAnyClick : false,
         	beforeShow : function(modalBody){
-        		 map = new google.maps.Map($(modalBody).find('#mapDiv')[0], mapOptions);
-                google.maps.event.addListener(map, 'click', function() {
-                  infowindow.close();
+			map = new google.maps.Map($(modalBody).find('#mapDiv')[0], mapOptions);
+		google.maps.event.addListener(map, 'click', function() {
+			infowindow.close();
                 });
                 var inputBox = $(modalBody).find('input[type=text]');
                 var defaultval =  "";
